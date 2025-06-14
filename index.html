@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Descubre destinos mágicos de Colombia con las mejores tarifas. Vuela a Medellín, Bogotá, Cartagena, Santa Marta y más.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 Ofertas Exclusivas de Vuelos | Colombia te espera</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+    }
+
+    .promos {
+      background: #ffffff;
+      padding: 40px 25px;
+      margin: 50px auto;
+      max-width: 900px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .promos h2 {
+      color: #1a237e;
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .promo-item {
+      background: #f5f5f5;
+      border-left: 6px solid #304ffe;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    .promo-item:hover {
+      background: #e8eaf6;
+      transform: translateY(-3px);
+    }
+
+    .promo-item strong {
+      color: #d500f9;
+      font-size: 18px;
+    }
+
+    .promo-item p {
+      margin: 5px 0;
+      color: #333;
+    }
+
+    #captchaOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      padding: 25px;
+      max-width: 350px;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 22px;
+      color: #1a237e;
+      margin-bottom: 15px;
+    }
+
+    .captchat img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .draggable {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      cursor: pointer;
+    }
+
+    .draggable.checked::after {
+      content: "✓";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #4caf50;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #304ffe;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #continueBtn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(to right, #00c853, #64dd17);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #continueBtn:hover {
+      background: linear-gradient(to right, #64dd17, #00c853);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="captchaOverlay">
+    <div class="container">
+      <h1>Verificación rápida</h1>
+      <div class="captchat">
+        <img src="https://baratosdelmestiqueteseconomicos.lovestoblog.com/ca.jpg" alt="Verificación de seguridad">
+        <div class="draggable" id="check"></div>
+      </div>
+      <div class="loader" id="loader"></div>
+      <button id="continueBtn">Acceder a las Ofertas</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="promos">
+      <h2>🌴 ¡Vuela por Colombia con estas Super Ofertas!</h2>
+
+      <div class="promo-item">
+        <p><strong>✈ Medellín → Cartagena:</strong> Desde $95.000 COP</p>
+        <p>¡Escápate al Caribe colombiano este fin de semana!</p>
+      </div>
+
+      <div class="promo-item">
+        <p><strong>🌊 Bogotá → San Andrés:</strong> Desde $110.000 COP</p>
+        <p>Explora el mar de los 7 colores con vuelos directos.</p>
+      </div>
+
+      <div class="promo-item">
+        <p><strong>🌞 Cali → Santa Marta:</strong> Desde $99.000 COP</p>
+        <p>Playas, brisa y mar te están esperando.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const check = document.getElementById('check');
+    const loader = document.getElementById('loader');
+    const continueBtn = document.getElementById('continueBtn');
+
+    check.addEventListener('click', () => {
+      check.classList.toggle('checked');
+      if (check.classList.contains('checked')) {
+        continueBtn.style.display = 'none';
+        loader.style.display = 'block';
+        setTimeout(() => {
+          loader.style.display = 'none';
+          continueBtn.style.display = 'inline-block';
+        }, 2000);
+      } else {
+        loader.style.display = 'none';
+        continueBtn.style.display = 'none';
+      }
+    });
+
+    continueBtn.addEventListener('click', () => {
+      document.getElementById('captchaOverlay').style.display = 'none';
+      window.location.href = "";
+    });
+  </script>
+</body>
+</html>

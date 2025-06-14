@@ -2,163 +2,229 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Explora la riqueza de Colombia y descubre lo mejor de Medellín, Bogotá, Cartagena, Santa Marta, Bucaramanga y San Andrés.">
+  <meta name="keywords" content="vuelos baratos, viajes baratos, tiquetes baratos, buscar vuelos, viajes colombia, viajes a medellin, viajes a bogota, vuelos a medellin, vuelos a bogota, vuelos a cartagena, vuelos a santa marta, vuelos a bucaramanga, vuelos a san andres">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Agencia de viajes en Colombia con las mejores promociones de vuelos nacionales e internacionales.">
-  <meta name="keywords" content="agencia de viajes, vuelos baratos, promociones, Colombia, turismo">
-  <title>Viaja Colombia - Agencia de Viajes</title>
+  <title>🎉 Promociones de Vuelos en Colombia | Tiquetes Baratos</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Reset de estilos */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background-color: #f4f4f4; color: #333; }
-    h1, h2, h3 { color: #003366; }
-    a { text-decoration: none; color: inherit; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
 
-    /* Estilos generales */
-    header { background: #003366; color: white; padding: 20px 0; text-align: center; }
-    header h1 { font-size: 2.5rem; }
-    .container { width: 90%; margin: 0 auto; }
-    .section { padding: 40px 0; }
-    .promo-item { background: white; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    .promo-item h3 { margin-bottom: 10px; }
-    footer { background: #003366; color: white; text-align: center; padding: 20px 0; }
-    footer p { margin: 10px 0; }
+    .promos {
+      background: #003366;
+      padding: 30px 20px;
+      margin: 40px auto;
+      max-width: 900px;
+      border: 1px solid #002244;
+      border-radius: 10px;
+    }
 
-    /* Estilos del CAPTCHA */
-    .captcha-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    .captcha-header { text-align: center; margin-bottom: 20px; }
-    .captcha-slider { position: relative; width: 100%; height: 40px; background: #f0f0f0; border-radius: 20px; overflow: hidden; }
-    .captcha-slider .slider { position: absolute; top: 0; left: 0; width: 40px; height: 40px; background: #003366; border-radius: 50%; cursor: pointer; transition: left 0.3s ease; }
-    .captcha-slider.success .slider { background: #28a745; }
-    .captcha-footer { text-align: center; margin-top: 20px; }
-    .captcha-footer button { padding: 10px 20px; background: #003366; color: white; border: none; border-radius: 5px; cursor: pointer; display: none; }
-    .captcha-footer button.show { display: inline-block; }
+    .promos h2 {
+      color: #ffffff;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .promo-item {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .promo-item strong {
+      color: #b40054;
+    }
+
+    #captchaOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(211, 211, 211, 0.8);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      padding: 20px;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .captchat {
+      position: relative;
+      margin-top: 15px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .captchat img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .draggable {
+      width: 22px;
+      height: 23px;
+      background-color: transparent;
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .draggable.checked::after {
+      content: "✓";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #1d04e1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #b40054;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #continueBtn {
+      margin: 15px auto 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(45deg, #3f1d7a, #b40054);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: none;
+    }
+
+    #continueBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(191, 0, 84, 0.4);
+    }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17146887886"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17146887886');
+  </script>
+
+  <!-- Event snippet for Compra conversion page -->
+  <script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17146887886/t_-pCPGBrtkaEM79ovA_',
+        'transaction_id': ''
+    });
+  </script>
 </head>
+
 <body>
-
-<header>
-  <div class="container">
-    <h1>Viaja Colombia</h1>
-    <p>Las mejores promociones de vuelos nacionales e internacionales</p>
-  </div>
-</header>
-
-<main>
-  <section class="section">
+  <!-- CAPTCHA Overlay Visible -->
+  <div id="captchaOverlay">
     <div class="container">
-      <h2>Promociones Destacadas</h2>
+      <h1>No soy un robot</h1>
+      <div class="captchat">
+        <img src="ca.jpg" alt="Imagen de Captchat"> <!-- reemplaza ca.jpg por tu imagen -->
+        <div class="draggable" id="check"></div>
+      </div>
+      <div class="loader" id="loader"></div>
+      <button id="continueBtn">Continuar</button>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <main>
+    <section class="promos">
+      <h2>✈️ Promociones Imperdibles por Colombia</h2>
       <div class="promo-item">
-        <h3>Medellín → Cartagena</h3>
-        <p>Desde $89.000 COP</p>
+        <p><strong>Medellín → Cartagena:</strong> Desde $89.000 COP</p>
         <p>¡Compra hoy y viaja cuando quieras!</p>
       </div>
       <div class="promo-item">
-        <h3>Bogotá → San Andrés</h3>
-        <p>Desde $120.000 COP</p>
+        <p><strong>Bogotá → San Andrés:</strong> Desde $120.000 COP</p>
         <p>Disfruta del mar de los siete colores.</p>
       </div>
       <div class="promo-item">
-        <h3>Bucaramanga → Santa Marta</h3>
-        <p>Desde $105.000 COP</p>
+        <p><strong>Bucaramanga → Santa Marta:</strong> Desde $105.000 COP</p>
         <p>Vuela a las mejores playas del país.</p>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <section class="section">
-    <div class="container">
-      <h2>Misión</h2>
-      <p>Ofrecer experiencias de viaje únicas, seguras y accesibles, conectando a nuestros clientes con los destinos más atractivos de Colombia y el mundo.</p>
-    </div>
-  </section>
+  <!-- Script de funcionalidad CAPTCHA -->
+  <script>
+    const check = document.getElementById('check');
+    const loader = document.getElementById('loader');
+    const continueBtn = document.getElementById('continueBtn');
 
-  <section class="section">
-    <div class="container">
-      <h2>Visión</h2>
-      <p>Ser la agencia de viajes líder en Colombia, reconocida por su compromiso con la calidad, la innovación y la satisfacción del cliente.</p>
-    </div>
-  </section>
+    check.addEventListener('click', () => {
+      check.classList.toggle('checked');
 
-  <section class="section">
-    <div class="container">
-      <h2>Agradecimientos</h2>
-      <p>Agradecemos a nuestros clientes por confiar en nosotros y a nuestros colaboradores por su dedicación y esfuerzo continuo.</p>
-    </div>
-  </section>
+      if (check.classList.contains('checked')) {
+        continueBtn.style.display = 'none';
+        loader.style.display = 'block';
 
-  <section class="section">
-    <div class="container">
-      <h2>Contacto</h2>
-      <p>Para más información, contáctanos al correo electrónico <a href="mailto:contacto@viajacolombia.com">contacto@viajacolombia.com</a> o visita nuestras oficinas en Bogotá, Medellín y Cartagena.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Verificación de Seguridad</h2>
-      <div class="captcha-container">
-        <div class="captcha-header">
-          <h3>Verifica que no eres un robot</h3>
-        </div>
-        <div class="captcha-slider" id="captchaSlider">
-          <div class="slider" id="slider"></div>
-        </div>
-        <div class="captcha-footer">
-          <button id="continueBtn" class="show">Continuar</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="container">
-    <p>&copy; 2025 Viaja Colombia. Todos los derechos reservados.</p>
-  </div>
-</footer>
-
-<script>
-  const slider = document.getElementById('slider');
-  const captchaSlider = document.getElementById('captchaSlider');
-  const continueBtn = document.getElementById('continueBtn');
-  let isSliding = false;
-
-  slider.addEventListener('mousedown', (e) => {
-    isSliding = true;
-    const startX = e.clientX;
-    const sliderWidth = slider.offsetWidth;
-    const sliderContainerWidth = captchaSlider.offsetWidth;
-
-    const onMouseMove = (e) => {
-      if (!isSliding) return;
-      let moveX = e.clientX - startX;
-      if (moveX < 0) moveX = 0;
-      if (moveX > sliderContainerWidth - sliderWidth) moveX = sliderContainerWidth - sliderWidth;
-      slider.style.left = moveX + 'px';
-    };
-
-    const onMouseUp = () => {
-      isSliding = false;
-      const sliderPosition = parseInt(slider.style.left);
-      if (sliderPosition >= sliderContainerWidth - sliderWidth) {
-        captchaSlider.classList.add('success');
-        continueBtn.classList.add('show');
+        setTimeout(() => {
+          loader.style.display = 'none';
+          continueBtn.style.display = 'block';
+        }, 2000);
       } else {
-        slider.style.left = '0px';
+        loader.style.display = 'none';
+        continueBtn.style.display = 'none';
       }
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-    };
+    });
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
-  continueBtn.addEventListener('click', () => {
-    window.location.href = 'https://viajacolombia.com';
-  });
-</script>
-
+    continueBtn.addEventListener('click', () => {
+      document.getElementById('captchaOverlay').style.display = 'none';
+      window.location.href = "";
+    });
+  </script>
 </body>
 </html>
